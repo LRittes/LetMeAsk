@@ -1,3 +1,6 @@
+import { useAuth } from '../../hooks/useAuth'
+import { Link } from 'react-router-dom'
+
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
 import { Btn } from '../../components/Btn'
@@ -5,6 +8,8 @@ import { Btn } from '../../components/Btn'
 import './style.scss'
 
 const NewRoom = () => {
+    const { user } = useAuth()
+
     return (
         <div id='page-auth'>
             <aside>
@@ -15,6 +20,7 @@ const NewRoom = () => {
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="Letmeask" />
+                    <h1>{user?.name}</h1>
                     <h2>Criar uma nova sala</h2>
                     <form>
                         <input 
@@ -25,7 +31,7 @@ const NewRoom = () => {
                             Criar sala
                         </Btn>
                     </form>
-                    <p>Quer entrar em uma sala existente? <a href="#">Clique aqui</a></p>
+                    <p>Quer entrar em uma sala existente? <Link to="/">Clique aqui</Link></p>
                 </div>
             </main>
         </div>
