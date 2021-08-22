@@ -1,11 +1,10 @@
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
-import googleIcon from '../../assets/images/google-icon.svg'
 import { Btn } from '../../components/Btn'
 
 import './style.scss'
 
-const Home = () => {
+const NewRoom = () => {
     return (
         <div id='page-auth'>
             <aside>
@@ -16,23 +15,21 @@ const Home = () => {
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="Letmeask" />
-                    <button className='create-room'>
-                        <img src={googleIcon} alt="Logo Google" />
-                    </button>
-                    <div className='separator'>Ou entre em uma sala</div>
+                    <h2>Criar uma nova sala</h2>
                     <form>
                         <input 
                             type="text" 
-                            placeholder='Digite o código da sala'
+                            placeholder='Nome da sala'
                         />
                         <Btn type='submit'>
-                            entrar na sala
+                            Criar sala
                         </Btn>
                     </form>
+                    <p>Quer entrar em uma sala existente? <a href="#">Clique aqui</a></p>
                 </div>
             </main>
         </div>
     )
 }
 
-export default Home;
+export default NewRoom;
