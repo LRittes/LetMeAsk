@@ -21,34 +21,6 @@ const AdmRoom = () => {
     const params = useParams<RoomParams>()
     const roomId = params.id
     const { questions, title } = useRoom(roomId)
-    
-    
-
-    async function handleSendQuestion(event: FormEvent) {
-        event.preventDefault()
-        
-        if(newQuestion.trim() === ''){
-            return
-        }
-
-        if(!user){
-            throw new Error('Você deve está logado!')
-        }
-
-        const question = {
-            content: newQuestion,
-            author: {
-                name: user.name,
-                avatar: user.avatar,
-            },
-            isHighlighted: false,
-            isAswered: false
-        }
-
-        await database.ref(`rooms/${roomId}/questions`).push(question)
-
-        setNewQuestion('')
-    }
 
     return (
         <div id="page-room">
