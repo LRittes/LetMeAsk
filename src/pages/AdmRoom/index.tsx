@@ -1,13 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import logoImg from '../../assets/images/logo.svg'
 import { Btn } from '../../components/Btn';
 import Question from '../../components/Question';
 import RoomCode from '../../components/RoomCode';
 import { useAuth } from '../../hooks/useAuth';
 import useRoom from '../../hooks/useRoom';
 import { database } from '../../services/firebase';
+
+import logoImg from '../../assets/images/logo.svg'
+import deleteImg from '../../assets/images/delete.svg'
 
 import "./style.scss"
 
@@ -21,6 +23,12 @@ const AdmRoom = () => {
     const params = useParams<RoomParams>()
     const roomId = params.id
     const { questions, title } = useRoom(roomId)
+
+    async function handleDeleteQuestion(questionId: string){
+        if(window.confirm('Deseja remover a pergunta?')){
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
+        }
+    }
 
     return (
         <div id="page-room">
@@ -46,7 +54,14 @@ const AdmRoom = () => {
                                 key={question.id}
                                 content={question.content}
                                 author={question.author}
-                            />
+                            >
+                                <button
+                                    type='button'
+                                    onClick={() => handleDeleteQuestion(question.id)}
+                                >
+                                    <img src={deleteImg} alt="Remover pergunta" />
+                                </button>
+                            </Question>
                         )
                     })}
                 </div>
