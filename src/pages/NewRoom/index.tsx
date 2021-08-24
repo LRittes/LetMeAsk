@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event'
 import { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'

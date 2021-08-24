@@ -8,18 +8,18 @@ type user = {
     avatar: string
   }
   
-  type AuthContext = {
+  type authContext = {
     user: user | undefined,
     singInWithGoogle: () => Promise<void>; // função que não tem retorno
   }
 
-export const AuthContext = createContext({} as AuthContext)
+export const AuthContext = createContext({} as authContext)
 
-type AuthContextProvide = {
+type authContextProvide = {
     children: ReactNode
 }
 
-export function AuthContextProvide(props: AuthContextProvide) {
+export function AuthContextProvide(props: authContextProvide) {
     const [user, setUser] = useState<user>()
 
   useEffect(() => {
