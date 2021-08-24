@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Btn } from '../../components/Btn';
 import Question from '../../components/Question';
@@ -20,9 +20,18 @@ type RoomParams = {
 const AdmRoom = () => {
     const [newQuestion, setNewQuestion] = useState('')
     const { user } = useAuth()
+    const history = useHistory()
     const params = useParams<RoomParams>()
     const roomId = params.id
     const { questions, title } = useRoom(roomId)
+
+    async function handleEndRoom() {
+        await database.ref(`rooms/${roomId}`).update({
+            endedAt: new Date
+        })
+
+        history.push('/')
+    }
 
     async function handleDeleteQuestion(questionId: string){
         if(window.confirm('Deseja remover a pergunta?')){
@@ -37,7 +46,7 @@ const AdmRoom = () => {
                     <img src={logoImg} alt="logo Letmeask" />
                     <div>
                         <RoomCode code={roomId}/>
-                        <Btn isOutlined >Encerrar sessão</Btn>
+                        <Btn isOutlined onClick={handleEndRoom}>Encerrar sessão</Btn>
                     </div>
                 </div>
             </header>
